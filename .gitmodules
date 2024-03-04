@@ -1,0 +1,4 @@
+[submodule "docs/stone"]
+	path = docs/stone
+	url = git@github.com:jqtmviyu/HOYOLIFE.git
+	branch = main
