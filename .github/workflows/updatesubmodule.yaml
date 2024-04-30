@@ -5,15 +5,21 @@ on:
     - cron: '10 0 * * *'  # 每天午夜执行
 
 jobs:
-  update-submodules:
+  update_submodule:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Update submodules
+      - name: Update submodule
+        run: git submodule update --init --recursive
+      - name: Check if changes were made
+        id: check_changes
         run: |
-          git submodule update --remote --recursive
-          git add .
-          git commit -m "Update submodules"
-          git push
+          if git diff --quiet; then
+            echo "No changes were made."
+          else
+            echo "Changes were made."
+            git add .
+            git commit -m "Update submodule"
+            git push
+          fi
