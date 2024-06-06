@@ -3,6 +3,7 @@ name: Update Submodules
 on:
   schedule:
     - cron: '10 0 * * *'  # 每天午夜执行
+  workflow_dispatch:
 
 jobs:
   update_submodule:
