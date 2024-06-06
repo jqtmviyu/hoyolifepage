@@ -1,9 +1,9 @@
 name: Update Submodules
 
 on:
+  workflow_dispatch: # 允许手动触发
   schedule:
     - cron: '10 0 * * *'  # 每天午夜执行
-  workflow_dispatch:
 
 jobs:
   update_submodule:
@@ -12,9 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          path: main
+          submodules: true # 确保检出子模块
+
       - name: Update submodule
         run: git submodule update --remote --recursive
+
       - name: Check if changes were made
         id: check_changes
         run: |
@@ -25,4 +27,3 @@ jobs:
             git add .
             git commit -m "Update submodule"
             git push
-          fi
