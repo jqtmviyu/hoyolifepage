@@ -20,10 +20,11 @@ jobs:
       - name: Check if changes were made
         id: check_changes
         run: |
-          if git diff --quiet; then
-            echo "No changes were made."
-          else
+          if ! git diff --quiet; then
             echo "Changes were made."
             git add .
             git commit -m 'Update submodule'
             git push
+          else
+            echo "No changes were made."
+          fi
