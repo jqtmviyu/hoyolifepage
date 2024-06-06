@@ -15,7 +15,9 @@ jobs:
           submodules: true # 确保检出子模块
 
       - name: Update submodule
-        run: git submodule update --remote --recursive
+        run: |
+          git submodule update --init --recursive
+          git submodule update --remote --recursive
 
       - name: Check if changes were made
         id: check_changes
